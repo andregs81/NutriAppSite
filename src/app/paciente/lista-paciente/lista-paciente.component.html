@@ -1,0 +1,94 @@
+<br>
+<div class="card text-secondary card bg-light">
+  <div class="card-header">
+    <h3>
+      <i class="fa fa-list-alt fa-lg"></i> Lista de Paciente</h3>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="form-group col-md-6">
+
+        <a class="btn btn-outline-secondary" [routerLink]="['novo']">
+          <i class="fa fa-user mr-2"></i>Novo Paciente</a>
+
+      </div>
+      <div class="form-group col-md-6">
+        <form class="form-inline my-2 my-lg-0 pull-right">
+          <input type="text " class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search" [(ngModel)]="filtro"
+            name="filtro" (keyup)="obterPaciente()">
+          <button class="btn btn-secondary my-2 my-sm-0" (click)="obterPaciente()">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Sobrenome</th>
+          <th scope="col">Cpf</th>
+          <th scope="col">Nascimento</th>
+          <th scope="col">Sexo</th>
+          <th scope="col">Telefone Fixo</th>
+          <th scope="col">Celular</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of obterPaciente()">
+          <th scope="row">{{ p.idPaciente }}</th>
+          <td>{{ p.nome }}</td>
+          <td>{{ p.sobrenome }}</td>
+          <td>{{ p.cpf | cpfMask }}</td>
+          <td>{{ p.datanascimento | date:"dd/MM/yyyy"}}</td>
+          <td>{{ p.sexo }}</td>
+          <td>{{ p.telefone }}</td>
+          <td>{{ p.celular }}</td>
+          <td>
+            <a [routerLink]="['editar', p.idPaciente]" class="fa fa-edit fa-lg text-secondary" title="Editar"></a>
+            <a (click)="onSelect(p)" data-toggle="modal" data-target="#exampleModalCenter"
+              title="Excluir" class="fa fa-trash fa-lg text-danger ml-3"></a>
+
+            <a class="fa fa-table fa-lg text-secondary ml-3" title="Histórico de avaliações"></a>
+          </td>
+        </tr>
+        <tr>
+      </tbody>
+    </table>
+
+
+    <!-- Modal -->
+    <div *ngIf="selectedForDelete"  class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-secondary" id="exampleModalLongTitle">
+              <i class="fa fa-trash fa-md"></i> Confirma Exclusão</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-dark">
+            Deseja realmente excluir paciente id:
+            <b>{{ paciente.idPaciente }}</b> | {{ paciente.nome }} {{ paciente.sobrenome }}?
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="closeModal" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+            <button type="button" (click)="Delete(paciente.idPaciente)" class="btn btn-primary">Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-footer">
+    <br>
+  </div>
+</div>
+<br>
+
+

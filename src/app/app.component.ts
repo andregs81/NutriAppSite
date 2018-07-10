@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  carros = [
+    {nome: 'Chevette', marca: 'GM'},
+    {nome: 'Argo', marca: 'Fiat'},
+    {nome: 'Fiesta', marca: 'Ford'},
+    {nome: 'HB20', marca: 'Hyunday'},
+    {nome: 'Gol', marca: 'VW'}
+  ];
 }

@@ -1,0 +1,324 @@
+<br>
+<div class="card text-secondary card bg-light">
+  <div class="card card-header">
+    <div class="row">
+      <h3 class="col-md-6">
+        <i class="fa fa-clipboard"></i> Avaliação</h3>
+      <h5 class="col-md-6 text-right">Data Avaliação: {{ dataAtual | date: "dd/MM/yyyy"}}</h5>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <form [formGroup]="avaliacaoForm">
+      <div class="form-row">
+        <div class="col-md-2 mb-3">
+          <app-input-container errorMessage="O peso é obrigatório" label="Peso">
+            <input type="number" class="form-control" placeholder="" formControlName="peso" [ngClass]="aplicaCssErro('peso')">
+          </app-input-container>
+        </div>
+        <div class="col-md-2 mb-3">
+          <app-input-container errorMessage="A estatura é obrigatória" label="Estatura">
+            <input type="number" class="form-control" placeholder="" formControlName="estatura" [ngClass]="aplicaCssErro('estatura')">
+          </app-input-container>
+        </div>
+
+        <div class="col-md-2 mb-3 offset-md-6">
+          <!--    <app-input-container errorMessage="A data é obrigatória" label="Data">
+                  <input type="number" class="form-control" placeholder="dd/mm/yyyy" formControlName="dataAvaliacao" [ngClass]="aplicaCssErro('estatura')"
+                    Mask="99/99/9999">
+                </app-input-container>
+              -->
+        </div>
+
+      </div>
+
+
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="headingDC">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-secondary" data-toggle="collapse" data-target="#collapseDC" aria-expanded="true" aria-controls="collapseDC">
+                <i class="fa fa-align-justify fa-lg"> DC</i>
+              </button>
+            </h5>
+          </div>
+          <!--Cabeçalho -->
+
+          <div id="collapseDC" class="collapse show" aria-labelledby="headingDC" data-parent="#accordion">
+            <div class="card-body text-dark">
+              <!--CONTEÚDO-->
+              <div class="form-row" id="DC" formGroupName="DC">
+                <div class="col-md-2 mb-3">
+                  <app-input-container label="Tríceps" errorMessage="Informação obrigatória">
+                    <input type="number" (blur)="calcEquacaoFaulkner()" class="form-control" placeholder="0mm" formControlName="triceps" [ngClass]="aplicaCssErro('DC.triceps')">
+                  </app-input-container>
+                </div>
+                <div class="col-md-2 mb-3">
+                  <app-input-container label="Escapular" errorMessage="Informação obrigatória">
+                    <input type="number" (blur)="calcEquacaoFaulkner()" class="form-control" placeholder="0mm" formControlName="escapular" [ngClass]="aplicaCssErro('DC.escapular')">
+                  </app-input-container>
+                </div>
+                <div class="col-md-2 mb-3">
+                  <app-input-container label="Suprailíaca" errorMessage="Informação obrigatória">
+                    <input type="number" (blur)="calcEquacaoFaulkner()" class="form-control" placeholder="0mm" formControlName="suprailiaca"
+                      [ngClass]="aplicaCssErro('DC.suprailiaca')">
+                  </app-input-container>
+                </div>
+                <div class="col-md-2 mb-3">
+                  <app-input-container errorMessage="Informação obrigatória" label="Abdominal">
+                    <input type="number" (blur)="calcEquacaoFaulkner()" class="form-control" placeholder="0mm" formControlName="abdominal" [ngClass]="aplicaCssErro('DC.abdominal')">
+                  </app-input-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Fecha do Acordeon1 -->
+
+        <div class="card">
+          <div class="card-header" id="headingPerimetros">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-secondary" data-toggle="collapse" data-target="#collapsePerimetros" aria-expanded="true"
+                aria-controls="collapsePerimetros">
+                <i class="fa fa-align-justify fa-lg"> Perimetros</i>
+              </button>
+            </h5>
+          </div>
+          <!--Cabeçalho -->
+
+          <div id="collapsePerimetros" class="collapse show" aria-labelledby="headingPerimetros" data-parent="#accordion">
+            <div class="card-body text-dark">
+              <!--CONTEÚDO-->
+              <div class="form-row" id="Perimetros" formGroupName="Perimetros">
+                <div class="col-md-2 mb-3">
+                  <app-input-container label="Braço Direito">
+                    <input type="number" class="form-control" placeholder="0cm" formControlName="bracoDireito">
+                  </app-input-container>
+                </div>
+                <div class="col-md-2 mb-3">
+                  <app-input-container label="Braço Esquerdo">
+                    <input type="number" class="form-control" placeholder="0cm" formControlName="bracoEsquerdo">
+                  </app-input-container>
+                </div>
+                <div class="col-md-2 mb-3">
+                  <app-input-container label="Cintura">
+                    <input type="number" class="form-control" placeholder="0cm" formControlName="cintura">
+                  </app-input-container>
+                </div>
+                <div class="col-md-2 mb-3">
+                  <app-input-container label="Pulso">
+                    <input type="number" class="form-control" placeholder="0cm" formControlName="pulso">
+                  </app-input-container>
+                </div>
+              </div>
+
+              <div class="form-group" formGroupName="Perimetros">
+                <div class="row">
+                  <div class="col-md-2 mb-3">
+                    <app-input-container label="Quadril">
+                      <input type="number" class="form-control" placeholder="0cm" formControlName="quadril">
+                    </app-input-container>
+                  </div>
+
+                  <div class="col-md-2 mb-3">
+                    <app-input-container label="Abdominal">
+                      <input type="number" class="form-control" placeholder="0cm" formControlName="abdominal">
+                    </app-input-container>
+                  </div>
+
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-2 mb-3">
+                    <app-input-container label="Coxa Direita">
+                      <input type="number" class="form-control" placeholder="0cm" formControlName="coxaDireita">
+                    </app-input-container>
+                  </div>
+
+                  <div class="col-md-2 mb-3">
+                    <app-input-container label="Coxa Esquerda">
+                      <input type="number" class="form-control" placeholder="0cm" formControlName="coxaEsquerda">
+                    </app-input-container>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-2 mb-3">
+                    <app-input-container label="Panturilha Direita">
+                      <input type="number" class="form-control" placeholder="0cm" formControlName="panturrilhaDireita">
+                    </app-input-container>
+                  </div>
+
+                  <div class="col-md-2 mb-3">
+                    <app-input-container label="Panturilha Esquerda">
+                      <input type="number" class="form-control" placeholder="0cm" formControlName="panturrilhaEsquerda">
+                    </app-input-container>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-2 mb-3">
+                    <app-input-container label="Torax">
+                      <input type="number" class="form-control" placeholder="0cm" formControlName="torax">
+                    </app-input-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Fecha Acordeon2 -->
+        <div class="card">
+          <!--Acordeon -->
+          <div class="card-header" id="headingComplementar">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-secondary" data-toggle="collapse" data-target="#collapseComplementar" aria-expanded="true"
+                aria-controls="collapseComplementar">
+                <i class="fa fa-align-justify fa-lg"> Complementar</i>
+              </button>
+            </h5>
+          </div>
+          <div id="collapseComplementar" class="collapse show" aria-labelledby="headingComplementar" data-parent="#accordion">
+            <div class="card-body text-dark">
+              <!--CONTEÚDO-->
+              <div class="form-row">
+                <div class="col-md-2">
+                  <label>Pressão Arterial</label>
+                  <input type="text" class="form-control" placeholder="00x00" formControlName="pressaoArterial" Mask="99x99">
+                </div>
+
+                <div class="col-md-2 mb-3">
+                  <label>Batimento</label>
+                  <input type="number" class="form-control" placeholder="0bpm" formControlName="batimentoCardiaco">
+                </div>
+
+                <div class="col-md-2 mb-3">
+                  <label>Bioimpedância</label>
+                  <input type="number" class="form-control" placeholder="12.9%" formControlName="bioimpedancia">
+                </div>
+
+                <div class="col-md-1 mb-3">
+                  <label>IIMC</label>
+                  <input type="number" class="form-control" placeholder="22.7" formControlName="iimc">
+                </div>
+
+                <div class="col-md-1 mb-3">
+                  <label>
+                    <b>Dieta(%)</b>
+                  </label>
+                  <input type="number" class="form-control" placeholder="%" formControlName="percRealizadoDieta">
+                </div>
+
+                <div class="col-md-1 mb-3">
+                  <label>
+                    <b>Treino(%)</b>
+                  </label>
+                  <input type="number" class="form-control" id="percRealizadoTreino" placeholder="%" formControlName="percRealizadoTreino">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Fecha Acordeon3 -->
+
+      </div>
+      <!--Fecha Acordeon -->
+
+      <!-- Card Rodapé -->
+      <div class="row">
+        <div class="col-md-3" id="divResumoGordura">
+          <div class="card border-success mb-3 mt-2" style="max-width: 25rem;">
+            <strong class="card-header text-success text-center">Faulkner</strong>
+            <div class="card-body text-success">
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th scope="row">% Gordura</th>
+                    <td>{{ percGordura | number:'1.1-2' }}%</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">% Livre Gord</th>
+                    <td>{{ percLivreGord | number:'1.1-2' }}%</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">% Ideal Gord</th>
+                    <td>{{ percIdealGord | number:'1.1-2' }}%</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">% Gord Sobra</th>
+                    <td>{{ percGordSobra | number:'1.1-2' }}%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="outras">
+          <div class="card border-success mb-3 mt-2" style="max-width: 25rem;">
+            <strong class="card-header text-success text-center">Resumo</strong>
+            <div class="card-body text-success">
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th scope="row">Peso Gordura</th>
+                    <td>{{ pesoGordura | number:'1.1-2' }}Kg</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Peso Magro</th>
+                    <td>{{ pesoMagro | number:'1.1-2' }}Kg</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">% Gord Acima Ideal</th>
+                    <td>{{ percGordSobra | number:'1.1-2' }}%</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Peso Ideal</th>
+                    <td>{{ pesoIdeal| number:'1.1-2' }}Kg</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card border-success mb-3 mt-2" style="height: 305.25px">
+            <strong class="card-header text-success text-center">Observações</strong>
+            <div class="card-body text-success">
+              <textarea class="form-control text-secondary" rows="8" placeholder="Observações sobre a avaliação." formControlName="observacoes"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botões -->
+      <div class="row mt-3">
+        <div class="form-group col-md-12">
+
+          <button type="button" class="btn btn-primary" [disabled]="!avaliacaoForm.valid">
+            <i class="fa fa-save"> Salvar</i>
+          </button>
+
+          <a routerLink="paciente/lista" class="btn btn-danger">
+            <i class="fa fa-times"> Cancelar</i>
+          </a>
+        </div>
+      </div>
+
+      <!--
+          <div style="margin-top: 20px">
+            <pre>
+                        É Valido: {{ avaliacaoForm.valid }}
+                        Valores: <br> {{ avaliacaoForm.value | json }}
+
+                </pre>
+          </div>
+        -->
+    </form>
+
+  </div>
+  <div class="card-footer">
+    <br>
+  </div>
+</div>

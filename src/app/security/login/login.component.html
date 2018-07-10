@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="card card-container">
+      <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+      <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+      <p id="profile-name" class="profile-name-card"></p>
+      <form class="form-signin" #F="ngForm">
+          <span id="reauth-email" class="reauth-email"></span>
+          <input type="text" id="UserID" name="UserID" class="form-control" [ngModel]="usuario.UserID" #login="ngModel" placeholder="Usuário" required autofocus>
+          <input type="password" id="AccessKey" name="AccessKey" class="form-control" placeholder="Senha" [ngModel]="usuario.AccessKey" #senha="ngModel" required>
+          <div id="remember" class="checkbox">
+              <label>
+                  <input type="checkbox" value="remember-me"> Lembrar me
+              </label>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block btn-signin" [disabled]="!F.valid" (click)="onSubmit(F.value)">Login</button>
+          <div>
+            <p>Valid:{{ F.valid }}</p>
+            <p>{{ F.value | json }}</p>
+          </div>
+      </form><!-- /form -->
+      <a href="#" class="forgot-password">
+          Esqueçeu a senha?
+      </a>
+  </div><!-- /card-container -->
+</div><!-- /container -->

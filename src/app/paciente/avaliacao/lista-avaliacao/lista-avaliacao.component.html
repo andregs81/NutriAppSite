@@ -1,0 +1,47 @@
+<br>
+<div class="card text-secondary card bg-light">
+  <div class="card-header">
+    <h3>
+      <i class="fa fa-list-alt fa-lg"></i> Avaliações do Paciente </h3>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="form-group col-md-6">
+
+        <a class="btn btn-outline-secondary" [routerLink]="['novo']">
+          <i class="fa fa-user mr-2"></i>Nova Avaliação</a>
+
+      </div>
+    </div>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Data</th>
+          <th scope="col" class="text-center" >Atingio a Meta</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of ultimasAvaliacoes">
+          <th scope="row">{{ a.avaliacaoId }}</th>
+          <td>{{ a.data | date:"dd/MM/yyyy" }}</td>
+          <td class="text-center">
+            <i class="fa fa-thumbs-up text-primary fa-2x" *ngIf="a.atingioMeta == 'Sim'" [title]="a.atingioMeta"></i>
+            <i class="fa fa-thumbs-down text-danger fa-2x" *ngIf="a.atingioMeta == 'Não'" [title]="a.atingioMeta"></i>
+          </td>
+          <td>
+              <a class="fa fa-edit fa-2x text-secondary" title="Editar"></a>
+              <a class="fa fa-trash fa-2x text-danger ml-3"></a>
+          </td>
+        </tr>
+        <tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <br>
+  </div>
+</div>
+<br>

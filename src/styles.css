@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  /*background: palegreen;*/
+  background: white;
+}
+hr {
+  background: silver;
+  border: 2px solid;
+
+}
+nav.nav-principal {
+  border-bottom: 2px solid;
+  color: white;
+}

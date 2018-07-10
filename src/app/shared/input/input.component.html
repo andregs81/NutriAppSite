@@ -1,0 +1,24 @@
+
+<!--<div class="has-feedback" [class.has-success]="hasSuccess()" [class.has-error]= "hasError()">-->
+<!--<div [class.text-danger]="hasError()"
+  <label class="control-label">{{label}}</label>
+  <ng-content></ng-content>
+
+  <div *ngIf="hasError()">
+    <span class="sr-only">(error)</span>
+    <div class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+      <i class="fa fa-times"> </i>
+    </div>
+  </div>
+</div>
+-->
+
+<div>
+    <label class="control-label">{{ label }}</label>
+    <ng-content></ng-content>
+    <span  *ngIf="hasError()" [class.invalid-tooltip]="hasError()">
+      {{ errorMessage }}
+      <!--<i class="fa fa-times"></i>-->
+    </span>
+  </div>
